@@ -1,12 +1,18 @@
 @import '~antd/dist/antd.css';
+@import '~video-react/dist/video-react.css';
 
 .App {
   text-align: center;
   padding: 20px;
 }
-
 .App .ant-row {
   margin-bottom: 10px;
+}
+
+.App .res {
+  word-wrap:break-word;
+  word-break: break-all;
+  text-align: left !important;
 }
 
 .App-logo {
