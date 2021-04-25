@@ -45,6 +45,16 @@ class App extends React.Component {
         })
     }
 
+    submitJson() {
+        const { jsonUrl } = this.state;
+        const { mediaUrl, mediaId } = getMediaUrl(jsonUrl);
+        this.setState({
+            mediaUrl,
+            mediaId,
+        });
+ 
+    }
+
     componentDidMount() {
         // subscribe state change
         // this.player.subscribeToStateChange(this.handleStateChange.bind(this));
@@ -154,6 +164,20 @@ class App extends React.Component {
                         </Row>
                         <Row>
                             <Col span={24}>
+                                <TextArea
+                                    onChange={e => this.setState({jsonUrl: e.target.value})}
+                                    placeholder="输入json"
+                                    autoSize={{minRows: 5}}
+                                />
+                            </Col>
+                        </Row>
+                        <Row justify='start'>
+                            <Col flex={0}>
+                                <Button onClick={() => this.submitJson()} type="primary">解析</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={24}>
                                 <Card className='res' title="解析结果">
                                     <ReactJson src={res && res.data}/>
                                 </Card>
@@ -177,7 +201,7 @@ class App extends React.Component {
                     <Col span={12}>
                         <Row justify='center'>
                             {
-                                <Player
+                                mediaUrl && <Player
                                     ref={ player => this.player = player }
                                     fluid={false}
                                     width={500}
